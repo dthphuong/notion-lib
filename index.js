@@ -9,6 +9,7 @@ const _ = require("underscore");
 const async = require("async");
 const axios = require('axios');
 const Notion = require('./Notion');
+const faker = require('faker');
 
 const databaseId = process.env.NOTION_API_DATABASE;
 
@@ -17,20 +18,15 @@ const databaseId = process.env.NOTION_API_DATABASE;
 //         console.log(`Data: ${JSON.stringify(response, null, 4)}`);
 //     })
 
-// DB.create(databaseId, {
-//     Name: Notion.Title('Hatake Kakshi'),
-//     Description: Notion.Rich_text('Đây là dữ liệu mẫu'),
-//     Select: Notion.Select('Ninja'),
-//     MultiSelect: Notion.MultiSelect(['Lôi', 'Phong', 'Thuỷ', 'Thổ', 'Hoả']),
-//     Number: Notion.Number(10),
-//     Url: Notion.Url('https://kakashi.konoha'),
-//     Phone: Notion.Phone('0147852369'),
-//     Email: Notion.Email('kakashi@konoha.jp'),
-//     Checkbox: Notion.Checkbox(true),
-// })
-//     .then((response) => {
-//         console.log(`Data: ${JSON.stringify(response, null, 4)}`);
-//     })
+DB.create(databaseId, {
+    "Họ tên": Notion.Rich_text(faker.name.findName()),
+    "Email": Notion.Email(faker.internet.email()),
+    "Phone": Notion.Phone(faker.phone.phoneNumber()),
+    "Lĩnh vực": Notion.Select(faker.name.jobArea())
+})
+    .then((response) => {
+        console.log(`Data: ${JSON.stringify(response, null, 4)}`);
+    })
 
 
 // DB.update('09390581-16dc-4ac2-870e-6928c8fd9827', {

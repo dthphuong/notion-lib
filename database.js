@@ -74,7 +74,7 @@ exports.create = async (databaseId, data) => {
     await notion.pages.update({
         page_id: response.id,
         properties: {
-            ID: Notion.Rich_text(response.id)
+            ID: Notion.Title(response.id)
         }
     });
 
